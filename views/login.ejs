@@ -1,48 +1,84 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
 
-<div class="container mt-5">
-  <h1>Login</h1>
-<% if (messages.success_msg) {%>
-  <li><%= messages.success_msg %></li>
-<%} %>
-  <div class="row">
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
+<html lang="en">
 
-          <!-- Makes POST request to /login route -->
-          <form action="/login" method="POST">
-            <div class="form-group">
-              <label for="name">name</label>
-              <input type="text" class="form-control" name="name">
+<head>
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+   
+    <link rel="stylesheet" href="login.css">
+   
+</head>
+
+<body>
+    <div class="signup-login-page-bg-container d-flex flex-column justify-content-center ">
+        <div class="container ">
+            <div class="row">
+                <div class="col-12 col-md-5 mb-4 text-center d-flex flex-column justify-content-center">
+                    <h1 class="khaatabook-heading">KhaataBook</h1>
+                    <p class="khaatabook-caption">Make your expenses notes much better..</p>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="signup-login-container text-center shadow">
+                        <div class="d-flex flex-row justify-content-center">
+                            <p class="signup-login-container-heading opened-section" onclick="gotoLogin()" id="topLogin">Login</p>
+                            <p class="signup-login-container-heading" onclick="gotoSignup()" id="topSignup">Signup</p>
+                            
+                        </div>
+
+
+                        <form action="/login" method="POST">
+                            <div id="loginContainer">
+                                <input type="email" placeholder="Email address" class="sign-login-input-element mt-3" id="login-email" name="email" autofocus/>
+                                <div class="d-flex flex-row pt-3">
+                                    <input type="password" placeholder="Password" class="sign-login-input-element" id="login-password" name="password" />
+                                    <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePassword1()" id="login-passwordToggleIcon"></i>
+                                </div>
+                                <button type="submit" class="login-button mt-4">Login</button>
+                            </div><ul>
+                            <% if (messages.success_msg) {%>
+                                <li><%= messages.success_msg %></li>
+                              <%} %>
+                              <% if (messages.failure_msg) {%>
+                                <li style="color: red;"><%= messages.failure_msg %></li>
+                              <%} %></ul>
+                        </form>
+
+                        <form action="/signup" method="post">
+                            <div id="signUpContainer" class="d-none">
+                                <input type="text" placeholder="User name" class="sign-login-input-element" id="signup-username" name="name" autofocus/>
+                                <input type="email" placeholder="Email address" class="sign-login-input-element mt-3" id="signup-email" name="email" />
+                                <input type="password" placeholder="Password" class="sign-login-input-element mt-3" id="signup-password1" name="password"/>
+                                <input type="password" placeholder="Re-enter password" class="sign-login-input-element mt-3" id="signup-password2" name="password2" />
+                                <div class="text-right"> <input type="checkbox" id="signupCheckbox" class="signup-checkbox mt-3 mr-1" />
+                                    <label for="signupCheckbox" class="signup-checkbox-label mt-1">Show password </label>
+                                </div>
+                                <p class="matched-status" id="matchedStatus"></p>
+                                <button  type="submit" class="login-button mt-4">Signup</button>
+                            </div><ul>
+                            <% if (typeof errors !== 'undefined') {%>
+                                <% errors.forEach(error => {%>
+                                  <li style="color: red;"><%=error.message%></li>
+                                  
+                                <%}); %>
+                              <%} %></ul>
+                        </form>
+
+
+
+                    </div>
+
+
+                </div>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-dark">Login</button>
-          </form>
-<div class="btn btn-dark"><a href="/register" >signup</a></div>
         </div>
-      </div>
     </div>
+    <script src="login.js"></script>
+    <script src="https://kit.fontawesome.com/8d77138f29.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="login.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</body>
 
-    <!-- <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <a class="btn btn-block" href="/auth/google" role="button">
-            <i class="fab fa-google"></i>
-            Sign In with Google
-          </a>
-        </div>
-      </div>
-    </div> -->
-
-  </div>
-</div>
-
-<%- include('partials/footer') %>
+</html>

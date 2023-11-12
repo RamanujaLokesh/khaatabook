@@ -45,13 +45,17 @@ pool.query(
     );
 
     passport.serializeUser((user,done)=>{
-        done(null,user.id);
+        // console.log(user);
+        // console.log(user.user_id);
+        done(null,user.user_id);
     });
-    passport.deserializeUser((id,done)=>{
-        pool.query(`SELECT * FROM users WHERE id = $1`,[id],(err,results)=>{
+    passport.deserializeUser((user_id,done)=>{
+        pool.query(`SELECT * FROM users WHERE user_id = $1`,[user_id],(err,results)=>{
             if (err) {
                 throw err;              
             }
+            // console.log("im here");
+            // console.log(results.rows[0].name);
             return done(null,results.rows[0]);
 
         });
