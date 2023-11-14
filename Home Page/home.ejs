@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="home.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d77138f29.js" crossorigin="anonymous"></script>
+
+
+
+    <script>
+        window.onload = function() {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "dark3",
+
+                backgroundColor: "white",
+                title: {
+                    text: "Chart Background Color"
+                },
+                exportFileName: "Doughnut Chart",
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Today Expenses"
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+
+                    type: "doughnut",
+                    innerRadius: 9,
+                    showInLegend: true,
+                    toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+                    indexLabel: "{name} - #percent%",
+                    dataPoints: [{
+                            y: 450,
+                            name: "Food"
+                        },
+                        {
+                            y: 120,
+                            name: "Insurance"
+                        },
+                        {
+                            y: 300,
+                            name: "Travelling"
+                        },
+                        {
+                            y: 800,
+                            name: "Housing"
+                        },
+                        {
+                            y: 150,
+                            name: "Education"
+                        },
+                        {
+                            y: 150,
+                            name: "Shopping"
+                        },
+                        {
+                            y: 250,
+                            name: "Others"
+                        }
+                    ]
+                }]
+            });
+            chart.render();
+
+            function explodePie(e) {
+                if (typeof(e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+                } else {
+                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+                }
+                e.chart.render();
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <h1 class="kathabook-heading">KhaataBook</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto ">
+                <a class="nav-link active" href="#homeSection">Home </a>
+                <a class="nav-link active" href="#">Friends</a>
+                <a class="nav-link active" href="#">Groups</a>
+                <a class="nav-link active" href="#">Reports</a>
+                <a class="nav-link active" href="#">
+                    <p id="mode"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high-fill" id="lightMode" viewBox="0 0 16 16">
+                            <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-stars-fill d-none" id="darkMode" viewBox="0 0 16 16">
+                            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+                            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle-half d-none" id="contrastMode" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+                        </svg>
+                    </p>
+                </a>
+                <a class="nav-link active" href="#">
+                    <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" class="profile-image" />
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="home-section">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-4 shadow-lg d-none d-sm-block pb-3 fixed-left">
+                    <div class="left-navbar ">
+
+                        <div class="left-navbar-top-section text-center">
+                            <h1 class="left-navbar-top-section-text">Today's:- <span>0</span></h1>
+                            <h1 class="left-navbar-top-section-text ">Month's:- <span>0</span></h1>
+                        </div>
+                        <hr class="hr-line" />
+                        <div class="left-navbar-middle-section text-center pb-1 pt-1">
+
+                            <a>
+                                <p class="left-navbar-middle-section-links">Yesterday</p>
+                            </a>
+
+                            <a>
+                                <p class="left-navbar-middle-section-links">Week</p>
+                            </a>
+
+                            <a>
+                                <p class="left-navbar-middle-section-links">Months</p>
+                            </a>
+                        </div>
+                        <hr class="hr-line" />
+                        <div class="left-navbar-down-section text-center w-100">
+                            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-sm-none ">
+
+                    <div class="top-section-for-mobiles">
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="p-3">
+                                <h1 class="left-navbar-top-section-text pt-4">Today's:- <span>0</span></h1>
+                                <h1 class="left-navbar-top-section-text d-none d-sm-block">Month's:- <span>0</span></h1>
+                            </div>
+                            <div class="p-3">
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Yesterday</p>
+                                </a>
+
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Week</p>
+                                </a>
+
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Months</p>
+                                </a>
+                            </div>
+                        </div>
+                        <hr class="hr-line" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-8 pt-sm-5">
+                    <form>
+                        <div class="homepage-top-section-for-input d-flex flex-row pt-sm-5">
+                            <div class="col-4 ">
+                                <input type="text" class="w-100 homepage-top-section-for-input-texts" placeholder="Amount" />
+                            </div>
+                            <div class="col-4 input-group mb-3 ">
+
+                                <select class="form-select w-100" id="inputGroupSelect01">
+                                    <option value="" disabled selected>Categories </option>
+                                    <option value="food">Food</option>
+                                    <option value="2">Entertainment</option>
+                                    <option value="3">Commute</option>
+                                    <option value="4">Shopping</option>
+                                    <option value="5">Health</option>
+                                    <option value="7">Education</option>
+                                    <option value="8">Others</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-primary  w-100">Add</button>
+                            </div>
+                        </div>
+                        <div class="col-12 pt-1">
+                            <textarea type="text" rows="1" class="w-100 top-section-for-mobiles-note" placeholder="Note"></textarea>
+                        </div>
+                    </form>
+
+                    <div class="home-section-note-cards row">
+                        <div class="col-12 col-sm-6 shadow-lg pt-3">
+                            <div class="home-section-note-each-card " id="homeSectionNoteCard">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="home-section-note-each-card-amount">12000/-</p>
+                                    <p class="home-section-note-each-card-category">Food</p>
+                                    <i class="fa-solid fa-chevron-down" id="homeSectionNoteCardIcon"></i>
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardNote">You'll use CSS selectors and the checkbox hack to produce something like an OnClick function.</p>
+                                    <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput"></textarea>
+                                    <div class="d-flex flex-column ml-auto"> <i class="fa-solid fa-pen d-none " id="homeSectionNoteCardPen"></i>
+                                        <i class="fa-solid fa-trash pt-2 d-none" id="homeSectionNoteCardDelete"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+  <script src="home.js"></script>
+</body>
+
+</html>
