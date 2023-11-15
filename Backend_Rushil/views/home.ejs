@@ -179,7 +179,7 @@
                         <hr class="hr-line" />
                     </div>
                 </div>
-<!-- start -->
+<!-- start -->  
                 <div class="col-12 col-sm-8 pt-sm-5">
                     <form class="item" action="/add" method="post">
                         <div class="homepage-top-section-for-input d-flex flex-row pt-sm-5">
@@ -207,13 +207,15 @@
                             <textarea type="text" rows="1" class="w-100 top-section-for-mobiles-note" placeholder="Note" name="newNote"></textarea>
                         </div>
                     </form>
-
+                    <div class="col-12">
+                        <h1 class="today-expenses-heading pt-3 pb-1">Today's Expenses</h1>
+                    </div>
                     <div class="home-section-note-cards row">
                         <!-- card start -->
                         <% locals.listItems %>
                         <% listItems.forEach(item => { %>
                           
-                        <div class="col-12 col-sm-6 shadow-lg pt-3">
+                        <div class="col-12 col-sm-6 shadow pt-3">
                             <div class="home-section-note-each-card " id="homeSectionNoteCard<%=item.expense_id%>">
                                 <div class="d-flex flex-row justify-content-between">
                                   
@@ -221,16 +223,23 @@
                                     <p class="home-section-note-each-card-category"><%=item.category%></p>
                                     <i class="fa-solid fa-chevron-down" onclick="handler('<%=item.expense_id%>')" id="homeSectionNoteCardIcon<%=item.expense_id%>"></i>
                                 </div>
-                            <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardTime<%=item.expense_id%>"><%=item.time%></p>
-                                <div class="d-flex flex-row">
-                        
-                                    <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardNote<%=item.expense_id%>"> <%=item.note%></p>
-                                    <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput<%=item.expense_id%>"></textarea>
+                           
+                                <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardTime<%=item.expense_id%>">Time:<%=item.time%></p>
+                                    <!-- <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput%=item.expense_id%>" value="%= item.note %>"></textarea> -->
+                                    <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardNote<%=item.expense_id%>"><%=item.note%></p>
                                     <div class="d-flex flex-column ml-auto"> 
-                                            <i class="fa-solid fa-pen d-none " id="homeSectionNoteCardPen<%=item.expense_id%>" ></i>
-                                    
+                                        <div class="d-none" id="homeSectionNoteCardPenAndCheck<%=item.expense_id%>">
+                                                
+                                            <form class="edit" action="/edit" method="post">   
+                                          <input type="hidden" name="updatedItemId" value="<%= item.expense_id %>">
+                                          <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput<%=item.expense_id%>" type="text" name="updatedItemTitle" value="<%= item.note %>"></textarea>                                    
+                                        <!-- check--> <button id="homeSectionNoteCardCheck<%=item.expense_id%>" class="d-none"> <i class="fa-solid fa-check" ></i></button>
+                                       
+                                    </form>
+                                        <!-- pen-->
+                                  <div class="d-flex flex-row">   <button id="homeSectionNoteCardPen<%=item.expense_id%>"><i class="fa-solid fa-pen" ></i></button>
                                     <a href="/delete/<%=item.expense_id%>"> <i class="fa-solid fa-trash pt-2 d-none" id="homeSectionNoteCardDelete<%=item.expense_id%>" ></i></a> 
-                                    </div>
+                                </div>       </div>
                                 </div>
 
                             </div>

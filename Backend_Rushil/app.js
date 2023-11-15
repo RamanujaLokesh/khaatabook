@@ -66,7 +66,7 @@ app.post("/edit", async (req, res) => {
   const id = req.body.updatedItemId;
 
   try {
-    await pool.query("UPDATE expensesheet SET note = ($1) WHERE expense_id = $2", [item,id]);
+    await pool.query("UPDATE expensesheet SET note = ($1) WHERE expense_id = $2", [req.body.updatedItemTitle,req.body.updatedItemId]);
     res.redirect("/");
   } catch (err) {
     console.log(err);

@@ -110,7 +110,7 @@ body {
 }
 
 .home-section-note-each-card {
-    background-color: #dbdbdb;
+    background-color: white;
     padding: 10px;
     font-family: "Roboto";
 
@@ -122,4 +122,10 @@ body {
 
 .home-section-note-each-card-note {
     font-size: 15px;
+}
+.today-expenses-heading{
+    font-size: 25px;
+    color:black;
+    font-family: "Roboto";
+    font-weight: bold;
 }
