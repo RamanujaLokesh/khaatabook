@@ -17,10 +17,10 @@ let items = [];
 
 app.get("/", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM expensesheet WHERE user_id=$1 ORDER BY expense_id DESC ;",[1]);
+    const result = await pool.query("SELECT * FROM expensesheet WHERE DATE_TRUNC('day', timestamp) = CURRENT_DATE AND user_id = $1 ORDER BY expense_id DESC;",[1]);
     items = result.rows;
-console.log(result);
-    res.render("file.ejs", {
+    console.log(result);
+    res.render("home.ejs", {
       listTitle: "Today",
       listItems: items,
     });
@@ -39,14 +39,14 @@ console.log(err);
 }
 });
 
-app.get('/edit/:id',async(req,res)=>{
-  const updatingingId = req.params.id;
-  try{
-    pool.query(`UPDATE expensesheet SET amount = $1 category = $2 note = $3 WHERE expense_id = $2;`,[req.body.amount,req.body.category,req.body.note,parseInt(updatingingId)]);
-  }catch(err){
-  console.log(err);  
-  }
-  });
+// app.get('/edit/:id',async(req,res)=>{
+//   const updatingingId = req.params.id;
+//   try{
+//     pool.query(`UPDATE expensesheet SET note = $1 WHERE expense_id = $2;`,[req.body.note,parseInt(updatingingId)]);
+//   }catch(err){
+//   console.log(err);  
+//   }
+//   });
 
 
 app.post("/add", async (req, res) => {
@@ -61,17 +61,17 @@ app.post("/add", async (req, res) => {
   }
 });
 
-// app.post("/edit", async (req, res) => {
-//   // const item = req.body.updatedItemTitle;
-//   // const id = req.body.updatedItemId;
+app.post("/edit", async (req, res) => {
+  const item = req.body.updatedItemTitle;
+  const id = req.body.updatedItemId;
 
-//   try {
-//     await pool.query("UPDATE expensesheet SET amount = ($1) WHERE expense_id = $2", [req.body.amount,20]);
-//     res.redirect("/");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+  try {
+    await pool.query("UPDATE expensesheet SET note = ($1) WHERE expense_id = $2", [item,id]);
+    res.redirect("/");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // app.delete("/delete", async (req, res) => {
 //   const id = req.params.deleteItemId;

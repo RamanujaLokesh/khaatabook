@@ -14,7 +14,7 @@ CREATE TABLE expensesheet(
 	amount MONEY,
 	category TEXT NOT NULL,
 	note TEXT,
-	timeStamp TIMESTAMP(0) DEFAULT current_timestamp,
+	timeStamp TIMESTAMP(0) DEFAULT ,
 	PRIMARY KEY(expenseId),
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
