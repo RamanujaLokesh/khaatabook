@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Teko:wght@300&display=swap');
+
+.khaatabook-heading {
+    color: black;
+    font-size: 55px;
+    /* text-shadow:1px 2px black ; */
+    font-weight: bold;
+    font-family: 'Caveat', cursive;
+    font-weight: bold;
+}
+
+.khaatabook-caption {
+    color:black;
+    font-size: 28px;
+    font-family: 'Teko', sans-serif;
+}
+
+.dashboard-bg-container {
+    font-family: "Roboto";
+    height: 100vh;
+    padding-top: 50%;
+    background-color: rgb(31, 211, 194);
+}
+
+.dashboard-card-container {
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.dashboard-image {
+    width: 100%;
+    
+}
+
+.dashboard-login-button {
+    background-color:rgba(245,74,117,0.993);
+    padding: 10px 50px;
+    color: white;
+    border: solid 1px rgba(245,74,117,0.993) ;
+    box-shadow:  rgba(191, 16, 51, 0.999) 0px 50px 100px -20px,  rgba(191, 16, 51, 0.999) 0px 30px 60px -30px, rgba(191, 16, 51, 0.999) 0px -2px 6px 0px inset;
+}
+
+.dashboard-signup-button {
+    background-color:  rgb(163, 250, 241);
+    padding: 10px 50px;
+    color:rgba(245,74,117,0.993) ;
+    border: solid 1px rgba(245,74,117,0.993);
+    
+}
+.dashboard-signup-button:hover {
+    background-color:rgba(245,74,117,0.993);
+    padding: 10px 50px;
+    color: white;
+    border: solid 1px rgba(245,74,117,0.993) ;
+    box-shadow:  rgba(191, 16, 51, 0.999) 0px 50px 100px -20px,  rgba(191, 16, 51, 0.999) 0px 30px 60px -30px, rgba(191, 16, 51, 0.999) 0px -2px 6px 0px inset;
+}
+
+.dashboard-card-container-signup-button {
+    background-color: #5a57fa;
+    padding: 10px 50px;
+    color: white;
+    border: solid 0px;
+}
+.dashboard-logo{
+    width:50px;
+    height: 50px;
+}

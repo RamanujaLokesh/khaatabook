@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+     <link rel="stylesheet" href="dashboard.css"/>
+     <link rel="icon" type="image/x-icon" href="/assets/icon-16.png">
+</head>
+
+<body>
+    <div class="dashboard-bg-container pt-5 pb-5 d-flex flex-column justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 pt-2 pb-5 d-sm-none d-flex flex-row">
+                    <img src="/assets/icon-96.png" class="dashboard-logo"/>
+                    <h1 class="khaatabook-heading text-center">KaathaBook</h1>
+                </div>
+                <div class="col-12 col-sm-4 ">
+                    <img src="/assets/dashboard-image-1.jpg" class="dashboard-image"/>
+                </div>
+                <div class="col-12 col-sm-8 text-center d-flex flex-column justify-content-center ">
+                    <div class="d-flex flex-row m-auto ">
+                        
+                        <img src="/assets/icon-96.png" class="dashboard-logo mr-3 d-none d-sm-block" />
+                    <h1 class="khaatabook-heading text-center d-none d-sm-block">KaathaBook</h1>
+                    </div>
+                    <p class="khaatabook-caption">Make your expense notes much better..</p>
+                    <div class="d-none d-sm-block"> <a href="/login"><button class="dashboard-login-button mr-4">Login</button></a>
+                       <a href="/login"> <button class="dashboard-signup-button">Signup</button></a>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row justify-content-center  pt-5 pb-5 d-sm-none">
+                    <form action="/login" method="get">
+                        <input type="submit" class="dashboard-login-button mr-4" value="login">
+                        <input type="submit" class="dashboard-signup-button" value="signup">
+                    </form>
+                    <!-- <button class="dashboard-login-button mr-4">Login</button> -->
+                    <!-- <button class="dashboard-signup-button">Signup</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d77138f29.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

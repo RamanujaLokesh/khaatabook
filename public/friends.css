@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+body {
+    font-family: "Roboto";
+}
+
+.kathabook-heading {
+    color: black;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Caveat', cursive;
+}
+.home-section-logo{
+    width: 50px;
+    height: 50px;
+}
+
+.navbar {
+    background-color: rgb(31, 212, 194);
+    
+}
+
+.nav-link {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.mode-icon {
+    color: white;
+    width: 50px;
+    margin-top: 0px;
+    height: 50px;
+}
+
+.profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.home-section {
+    height: 100vh;
+    width: 100%;
+}
+
+.left-navbar {
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+}
+
+.left-navbar-top-section {
+    padding-top: 90px;
+}
+
+.left-navbar-top-section-text {
+    font-size: 24px;
+}
+
+.left-navbar-middle-section-links {
+    list-style: none;
+    color: black;
+    text-decoration: none;
+}
+
+.hr-line {
+    background-color: #a2a2a3;
+    width: 100%;
+}
+
+.left-navbar-down-section {
+    width: 100%;
+    color: #a5faf1;
+}
+
+#donutchart1 {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+.friends-section-bg-container {
+    padding: 90px 10px 10px 30px;
+}
+
+.friends-section-each-card {
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+
+}

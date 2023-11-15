@@ -13,6 +13,30 @@
 
        <form action="/joingroup" method="post">
         <input type="number" placeholder="group code to join" name="groupcode">
+        <input type="submit" value="join">
        </form>
+
+<% locals.msg %>
+<% if (msg) { %>
+ 
+    <h1 style="color: brown;"><%=msg %></h1>
+    <% } %>
+
+<%if(locals.groups){%>
+<h2><%=groups[0].group_name%></h2>
+    
+    <% for(let group of groups) { %>
+        
+        <div class="card" style="height: 7rem; width: 7rem;">
+        <h5 class="card-header"><%= group.group_name %></h5>
+        <div class="card-body">
+            <h5 class="card-title"><%= group.group_code %></h5>
+            <a href="#" class="btn btn-primary">open group</a>
+        </div>
+    </div>
+    
+    <% } };%>
+    
+    <%  %> 
 </body>
 </html>

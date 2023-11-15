@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/friends.css">
+    <link rel="stylesheet" href="home.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <link rel="icon" type="image/x-icon" href="/assets/icon-16.png">
-
-
-
-
-   
+    
 </head>
 
 <body>
@@ -22,12 +17,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto ">
-                <a class="nav-link active" href="/home"  style="color:black ;font-weight:bold;">Home </a>
-                <a class="nav-link active" href="/friends"  style="color:black ;font-weight:bold;">Friends</a>
-                <a class="nav-link active" href="/groups"  style="color:black ;font-weight:bold;">Groups</a>
-                <a class="nav-link active" href="#"  style="color:black ;font-weight:bold;">Reports</a>
-                <a class="nav-link active" href="#"  style="color:black ;font-weight:bold;">
+            <div class="navbar-nav ml-auto " >
+                <a class="nav-link" href="/home" style="color:black ;font-weight:bold;">Home </a>
+                <a class="nav-link" href="/friends" style="color:black ;font-weight:bold;">Friends</a>
+                <a class="nav-link" href="/groups" style="color:black ;font-weight:bold;">Groups</a>
+                <a class="nav-link" href="#" style="color:black ;font-weight:bold;">Reports</a>
+                <a class="nav-link" href="#" style="color:black ;font-weight:bold;">
                     <p id="mode"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high-fill" id="lightMode" viewBox="0 0 16 16">
                             <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
                         </svg>
@@ -50,7 +45,7 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="col-4  shadow-lg d-none d-sm-block pb-3 fixed-left">
+                <div class="col-4 shadow-lg d-none d-sm-block pb-3 fixed-left">
                     <div class="left-navbar ">
 
                         <div class="left-navbar-top-section text-center">
@@ -74,54 +69,120 @@
                         </div>
                         <hr class="hr-line" />
                         <div class="left-navbar-down-section text-center w-100">
-                            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                            <a href="/logout"><button class="btn btn-danger text-center w-50">Logout</button></a>
+                            <div id="chartContainer" style="height: 300px; width: 100%;" class="mb-5 "></div>
+                           <a href="/logout"><button class="btn btn-danger text-center w-50">Logout</button></a>
                         </div>
+                        
                     </div>
+
                 </div>
 
+                <div class="col-12 d-sm-none ">
 
-                <div class="col-12 col-sm-8">
-                    <div class="friends-section-bg-container row">
-                        <div class="col-12">
-                            <form class="d-flex flex-row justify-content-center" action="/add-friend" method="post">
-                                <input class="form-control mr-sm-2 w-70" type="search" placeholder="Add Friends" aria-label="Search" name="intofriends">
-                                <button class="btn btn-outline-success ml-2 my-sm-0 w-20" type="submit">Add</button>
-                            </form>
+                    <div class="top-section-for-mobiles">
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="p-3">
+                                <h1 class="left-navbar-top-section-text pt-4">Today's:- <span>0</span></h1>
+                                <h1 class="left-navbar-top-section-text d-none d-sm-block">Month's:- <span>0</span></h1>
+                            </div>
+                            <div class="p-3">
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Yesterday</p>
+                                </a>
+
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Week</p>
+                                </a>
+
+                                <a>
+                                    <p class="left-navbar-middle-section-links">Months</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="friends-section-cards row">
-                        <!-- Card Start -->
-                        <% if (locals.friends) { %>
-                         <% friends.forEach(friend=>{%>
-                          
-                                <div class="col-12 col-sm-6 mt-3 ">
-                                    <div class="friends-section-each-card text-center ">
-                                        <p class="friends-section-each-card-name"><%=friend%></p>
-                                        <a href="/delete/<%=friend%>" class="btn btn-danger">Unfriend</a>
-
-                                        <!-- <button class="btn btn-danger">Unfriend</button> -->
-                                    </div>
-                                </div>
-                                
-                                <%}); %>
-                                <% }else{ %>
-                                    <h4>no friends</h4>
-                                    <% } %>
-                                <!-- Card End -->
-                         
-
-                        </div>
+                        <hr class="hr-line" />
                     </div>
+                </div>
+<!-- start -->
+<div class="col-12 col-sm-8 pt-sm-5">
+    <form class="item" action="/addexpense" method="post">
+        <div class="homepage-top-section-for-input d-flex flex-row pt-sm-5">
+            <div class="col-4 ">
+                <input type="number" name="newAmount" class="w-100 homepage-top-section-for-input-texts" placeholder="Amount" />
+            </div>
+            <div class="col-4 input-group mb-3 ">
 
-
-
-
-
+                <select class="form-select w-100" id="inputGroupSelect01" name="newCategory">
+                    <option value="" disabled selected>Categories </option>
+                    <option value="Food">Food</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Commute">Commute</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-primary  w-100" type="submit" name="list" value=<%=listTitle %>>Add</button>
+            </div>
+        </div>
+        <div class="col-12 pt-1">
+            <textarea type="text" rows="1" class="w-100 top-section-for-mobiles-note" placeholder="Note" name="newNote"></textarea>
+        </div>
+    </form>
+    <div class="col-12">
+        <h1 class="today-expenses-heading pt-3 pb-1">Today's Expenses</h1>
+    </div>
+    <div class="home-section-note-cards row">
+        <!-- card start -->
+        <% locals.listItems %>
+        <% listItems.forEach(item => { %>
+          
+        <div class="col-12 col-sm-6 shadow pt-3">
+            <div class="home-section-note-each-card " id="homeSectionNoteCard<%=item.expense_id%>">
+                <div class="d-flex flex-row justify-content-between">
+                  
+                    <p class="home-section-note-each-card-amount"><%=item.amount%></p>
+                    <p class="home-section-note-each-card-category"><%=item.category%></p>
+                    <i class="fa-solid fa-chevron-down" onclick="handler('<%=item.expense_id%>')" id="homeSectionNoteCardIcon<%=item.expense_id%>"></i>
+                </div>
+           
+                <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardTime<%=item.expense_id%>">Time:<%=item.time%></p>
+                    <!-- <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput%=item.expense_id%>" value="%= item.note %>"></textarea> -->
+                    <p class="home-section-note-each-card-note d-none" id="homeSectionNoteCardNote<%=item.expense_id%>"><%=item.note%></p>
+                    <div class="d-flex flex-column ml-auto"> 
+                        <div class="d-none" id="homeSectionNoteCardPenAndCheck<%=item.expense_id%>">
+                                
+                            <form class="edit" action="/editexpense" method="post">   
+                          <input type="hidden" name="updatedItemId" value="<%= item.expense_id %>">
+                          <textarea class="d-none top-section-for-mobiles-note w-100 mr-2" rows="1" id="homeSectionNoteCardNoteInput<%=item.expense_id%>" type="text" name="updatedItemTitle" value="<%= item.note %>"></textarea>                                    
+                        <!-- check--> <button id="homeSectionNoteCardCheck<%=item.expense_id%>" class="d-none"> <i class="fa-solid fa-check" ></i></button>
+                       
+                    </form>
+                        <!-- pen-->
+                  <div class="d-flex flex-row">   <button id="homeSectionNoteCardPen<%=item.expense_id%>"><i class="fa-solid fa-pen" ></i></button>
+                    <a href="/deleteexpense/<%=item.expense_id%>"> <i class="fa-solid fa-trash pt-2 d-none" id="homeSectionNoteCardDelete<%=item.expense_id%>" ></i></a> 
+                </div>       </div>
                 </div>
 
             </div>
+
+        </div>
+        <% }) %>
+        <!-- card end -->
+    </div>
+
+                </div>
+                <!--  home page ends here  -->
+                
+            </div>
         </div>
     </div>
+    <script src="home.js"></script>
+
+
+
+
     <script>
         window.onload = function() {
 
@@ -193,6 +254,8 @@
 
         }
     </script>
+
+
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

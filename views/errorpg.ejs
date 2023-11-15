@@ -6,7 +6,12 @@
     <title></title>
 </head>
 <body>
-    <a href="<%= locals.link %>">click here</a>
+  <form action="/<%=locals.link %>" method="get">
+    <input type="submit" value="click here"/></form>
+
+
+    <br>
+    <a href="/<%=link%>">back page</a>
 
     <h1>
       <%= locals.errmsg %>

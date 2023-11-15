@@ -14,7 +14,7 @@ const initializePassport = require("./passportConfig");
 initializePassport(passport);
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; 
 
 app.use(morgan("dev"));
 
@@ -37,23 +37,32 @@ app.use(express.static("public"))
 
 
 app.get('/', checkNotAuthenticated, (req, res) => {
-    res.render('login.ejs');
+    res.render('dashboard.ejs');
 });
-app.get('/login', checkNotAuthenticated, (req, res) => {
-    res.render('login');
+app.get('/login',(req, res) => {
+    res.render('login.ejs');
 });
 app.get('/signup', checkAuthenticated, (req, res) => {
     res.render('login.ejs');
 });
 
 // passport.authenticate('local', { failureRedirect: '/login' })
-app.get('/secrets', checkAuthenticated, (req, res) => {
-    // if (isAuthenticated) {
 
-    //     res.render('secrets');
-    // }
-    res.render('secrets');
+let items = [];
+app.get("/home", checkAuthenticated,async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM expensesheet WHERE DATE_TRUNC('day', timestamp) = CURRENT_DATE AND user_id = $1 ORDER BY expense_id DESC;",[BigInt(req.user.user_id)]);
+    items = result.rows;
+    console.log(result);
+    res.render("home.ejs", {
+      listTitle: "Today",
+      listItems: items,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
+
 
 app.get('/logout', checkAuthenticated, (req, res) => {
     req.logOut((err) => {
@@ -64,6 +73,18 @@ app.get('/logout', checkAuthenticated, (req, res) => {
         res.render('login');
     });
 });
+
+app.get('/deleteexpense/:id',checkAuthenticated,async(req,res)=>{
+    const deletingId = req.params.id;
+    try{
+      pool.query(`DELETE FROM expensesheet WHERE expense_id = $1;`,[parseInt(deletingId)]);
+      res.redirect('/home')
+    }catch(err){
+    console.log(err);  
+    }
+    });
+
+
 
 app.get('/friends', checkAuthenticated, async (req, res) => {
     const friendsData = await pool.query(`SELECT *FROM friends WHERE user_id = $1`, [req.user.user_id]);
@@ -107,10 +128,52 @@ app.get('/delete/:friend', checkAuthenticated, async (req, res) => {
 
     res.redirect('/friends');
 });
+ 
 
+app.get('/groups', checkAuthenticated,(req, res) => {
+    let result;
+pool.query(`SELECT group_codes FROM users WHERE user_id =$1;`,[req.user.user_id],(err,results)=>{
+if (err) {
+    throw err;
+}
+result = results.rows;
+console.log(result)
+const groupCodes = results.rows[0].group_codes;
+let groupDetails =[];
+console.log(groupCodes);
+let topush;
 
-app.get('/groups', checkAuthenticated, (req, res) => {
-    res.render("groupshome");
+if (groupCodes!==null) {
+    
+     try {
+        console.log("entered try block");
+        groupCodes.forEach( groupCode => {
+            pool.query(`SELECT group_name,group_code FROM group_details WHERE group_code = $1;`,[groupCode],(err,results)=>{
+            if (err) {
+                throw err;
+            } 
+                     // console.log(result);
+            topush = results.rows[0]; 
+            groupDetails.push(topush);
+            console.log("1234....");
+            // console.log(groupDetails);
+            });
+       
+        });
+     } catch (error) {
+        console.log(err);
+     }
+ 
+      
+   setTimeout(()=>{console.log(groupDetails);
+    // console.log(JSON.stringify(groupDetails));
+    // const groupsData = JSON.stringify(groupDetails);
+    res.render("groupshome",{groups:groupDetails,msg:"rendered from if section"});},900); 
+    
+}else{
+    res.render("groupshome",{msg:"rendered this"});
+}
+});
 });
 
 app.get('/creategroup', checkAuthenticated, async (req, res) => {
@@ -222,10 +285,35 @@ app.post('/signup', async (req, res) => {
 
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: "/secrets",
+    successRedirect: "/home",
     failureRedirect: "/login",
     failureFlash: true
 }));
+
+app.post("/addexpense", checkAuthenticated,async (req, res) => {
+    const item = req.body.newItem;
+    // const amount=parseInt;
+    // items.push({title: item});
+    try {
+      pool.query("INSERT INTO expensesheet (amount,category,user_id,note) VALUES ($1,$2,$3,$4);", [req.body.newAmount,req.body.newCategory,BigInt(req.user.user_id),req.body.newNote]);
+       res.redirect("/home");
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+
+  app.post("/editexpense",checkAuthenticated, async (req, res) => {
+    const item = req.body.updatedItemTitle;
+    const id = req.body.updatedItemId;
+  
+    try {
+      await pool.query("UPDATE expensesheet SET note = ($1) WHERE expense_id = $2", [req.body.updatedItemTitle,req.body.updatedItemId]);
+      res.redirect("/home");
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
 let notFoundUser = false;
 app.post('/add-friend', checkAuthenticated, async (req, res) => {
@@ -236,8 +324,8 @@ app.post('/add-friend', checkAuthenticated, async (req, res) => {
     console.log(friendExists);
     if (!friendExists.rows[0].exists) {
         notFoundUser = true;
-        res.render('errorpg', { errmsg: "no user identified of incorrect username", link: "/friends" });
-        return;
+        res.render('errorpg', { errmsg: "no user identified of incorrect username", link: "friends" });
+        
     } else {
 
         friendname = req.body.intofriends;
@@ -259,12 +347,14 @@ app.post('/add-friend', checkAuthenticated, async (req, res) => {
 
 
 
-app.post('/create/:code', (req, res) => {
+app.post('/create/:code', async(req, res) => {
 
+    
     if (req.body.groupcode !== req.params.code) {
         res.render("creategroup", { errmsg: "entered group code not matched", groupcode: req.params.code });
     } else {
-        pool.query(`INSERT INTO group_details (group_name,host_id,host_name,group_code) VALUES ($1,$2,$3,$4);`, [req.body.groupname, BigInt(req.user.user_id), req.user.name, req.params.code]);
+      await  pool.query(`INSERT INTO group_details (group_name,host_id,host_name,group_code) VALUES ($1,$2,$3,$4);`, [req.body.groupname, BigInt(req.user.user_id), req.user.name, req.params.code]);
+      await  pool.query(`UPDATE users SET group_codes = group_codes||$1 WHERE user_id  = $2;`,[[BigInt(req.params.code)],req.user.user_id]);
         res.redirect('/groups');
     }
 });
@@ -273,8 +363,24 @@ app.post('/create/:code', (req, res) => {
 
 
 app.post('/joingroup',checkAuthenticated,async(req,res)=>{
-
+const result = await pool.query(`SELECT members FROM group_details WHERE group_code=$1;`,[req.body.groupcode]);
+if (result.rows[0].members===null) {
+     
+    await pool.query(`UPDATE group_details SET members = members||$1 WHERE group_code = $2;` [[req.user.name],req.body.groupcode]);
+    await pool.query(`UPDATE users SET group_codes = group_codes||$1 WHERE user_id = $2;` [[req.body.groupcode],req.user.user_id]);
     
+    res.redirect('/groups');   
+}
+const index = result.rows[0].members.indexOf(req.user.name);
+if (index!==-1) {
+    
+    await pool.query(`UPDATE group_details SET members = members||$1 WHERE group_code = $2;` [[req.user.name],req.body.groupcode]);
+    await pool.query(`UPDATE users SET group_codes = group_details||$1 WHERE user_id = $2;` [[req.body.groupcode],req.user.user_id]);
+    
+    res.redirect('/groups');
+}else {
+    res.render("errorpg",{errmsg:"already in group",link:"/groups"});
+    }
 });
 
 

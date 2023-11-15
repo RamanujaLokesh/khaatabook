@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Teko:wght@300&display=swap');
+ 
+ @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
 body {
     font-family: "Roboto";
@@ -7,7 +10,8 @@ body {
 .signup-login-page-bg-container {
     padding-top: 9%;
     padding-bottom: 9%;
-    background-color: #a5faf1;
+    background-color: rgb(31, 212, 194);
+    /* background-color: rgb(132, 248, 236); */
     height: 100vh;
 }
 
@@ -27,14 +31,16 @@ body {
 }
 
 .signup-login-container-heading:hover {
-    background-color: rgba(204, 27, 62, 0.877);
+    background-color:rgba(245, 74, 117, 0.933) ;
     padding: 10px 20px;
+    /* border-radius: 0.5rem; */
     color: white;
+    box-shadow:  rgba(191, 16, 51, 0.999) 0px 50px 100px -20px,  rgba(191, 16, 51, 0.999) 0px 30px 60px -30px, rgba(191, 16, 51, 0.999) 0px -2px 6px 0px inset;
     cursor: pointer;
 }
 
 .sign-login-input-element {
-    width: 100%;
+    width: 100%; 
     padding: 15px;
     border: 2px solid #e1e3e8;
     font-family: "Roboto";
@@ -56,27 +62,28 @@ body {
     color: white;
     font-weight: bold;
     border: 0px solid;
-    background-color: #f54a75ee;
+    box-shadow:  rgba(191, 16, 51, 0.999) 0px 50px 100px -20px,  rgba(191, 16, 51, 0.999) 0px 30px 60px -30px, rgba(191, 16, 51, 0.999) 0px -2px 6px 0px inset;
+    background-color: rgba(245, 74, 117, 0.933) ;
 }
 
 .kathabook-heading {
     color: #141401;
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 4rem;
+    
 }
 
 .opened-section {
-    /* background: rgb(240,60,106);
-background: radial-gradient(circle, rgba(240,60,106,1) 61%, rgba(213,218,19,1) 100%); */
-background: rgb(223,34,117);
-background: radial-gradient(circle, rgba(223,34,117,1) 0%, rgba(66,238,231,1) 100%);
+    background-color:rgba(245, 74, 117, 0.933) ;
     padding: 10px 20px;
+    /* border-radius: 0.5rem; */
     color: white;
-    border-radius:26px;
+    box-shadow:  rgba(191, 16, 51, 0.999) 0px 50px 100px -20px,  rgba(191, 16, 51, 0.999) 0px 30px 60px -30px, rgba(191, 16, 51, 0.999) 0px -2px 6px 0px inset;
+    cursor: pointer;
 }
 
 .khaatabook-caption {
-    font-size: 25px;
+    font-size: 2rem;
+    font-family: 'Teko', sans-serif;
 }
 
 .signup-checkbox {
@@ -95,3 +102,4 @@ background: radial-gradient(circle, rgba(223,34,117,1) 0%, rgba(66,238,231,1) 10
     font-size: 20px;
     font-weight: bold;
 }
+
