@@ -48,8 +48,12 @@
                 <div class="col-4 shadow-lg d-none d-sm-block pb-3 fixed-left">
                     <div class="left-navbar ">
 
+                        <% locals.listItems;let todayTotal=0.0; %>
+                        <% listItems.forEach(item => { %>
+                            <% todayTotal = todayTotal+parseFloat(item.amount); %>
+                             <% }); %>
                         <div class="left-navbar-top-section text-center">
-                            <h1 class="left-navbar-top-section-text">Today's:- <span>0</span></h1>
+                            <h1 class="left-navbar-top-section-text">Today's:- <span><%=todayTotal%></span></h1>
                             <h1 class="left-navbar-top-section-text ">Month's:- <span>0</span></h1>
                         </div>
                         <hr class="hr-line" />
@@ -178,14 +182,34 @@
             </div>
         </div>
     </div>
+    <% if (locals.categorywise) { %>
+     
+        <input id="food" value="<%=categorywise.food%>" class="d-none" />
+        <input id="commute" value="<%=categorywise.commute%>" class="d-none" />
+        <input id="shopping" value="<%=categorywise.shopping%>" class="d-none" />
+        <input id="health" value="<%= categorywise.health%>" class="d-none" />
+        <input id="education" value="<%=categorywise.education%>" class="d-none" />
+        <input id="entertainment" value="<%=categorywise.entertainment %>" class="d-none" />
+        <input id="others" value="<%=categorywise.others %>" class="d-none" />
+        <% console.log(categorywise)} %>
+
     <script src="home.js"></script>
 
 
 
 
     <script>
+        let food = document.getElementById("food");
+        let commute = document.getElementById("commute");
+        let shopping = document.getElementById("shopping");
+        let health = document.getElementById("health");
+        let education = document.getElementById("education");
+        let entertainment = document.getElementById("entertainment");
+        let others = document.getElementById("others");
+
         window.onload = function() {
 
+          
             var chart = new CanvasJS.Chart("chartContainer", {
                 theme: "dark3",
 
@@ -208,34 +232,34 @@
                     type: "doughnut",
                     innerRadius: 9,
                     showInLegend: true,
-                    toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+                    toolTipContent: "<b>{name}</b>: &#8377;{y} (#percent%)",
                     indexLabel: "{name} - #percent%",
                     dataPoints: [{
-                            y: 450,
+                            y: parseInt(food.value),
                             name: "Food"
                         },
                         {
-                            y: 120,
-                            name: "Insurance"
+                            y: parseInt(entertainment.value),
+                            name: "Entertainment"
                         },
                         {
-                            y: 300,
-                            name: "Travelling"
+                            y: parseInt(commute.value),
+                            name: "Commute"
                         },
                         {
-                            y: 800,
-                            name: "Housing"
-                        },
-                        {
-                            y: 150,
-                            name: "Education"
-                        },
-                        {
-                            y: 150,
+                            y: parseInt(shopping.value),
                             name: "Shopping"
                         },
                         {
-                            y: 250,
+                            y: parseInt(health.value),
+                            name: "Health"
+                        },
+                        {
+                            y: parseInt(education.value),
+                            name: "Education"
+                        },
+                        {
+                            y: parseInt(others.value),
                             name: "Others"
                         }
                     ]
@@ -253,6 +277,7 @@
             }
 
         }
+   
     </script>
 
 

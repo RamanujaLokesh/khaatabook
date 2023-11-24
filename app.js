@@ -46,24 +46,6 @@ app.get('/signup', checkAuthenticated, (req, res) => {
     res.render('login.ejs');
 });
 
-// passport.authenticate('local', { failureRedirect: '/login' })
-
-let items = [];
-app.get("/home", checkAuthenticated,async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM expensesheet WHERE DATE_TRUNC('day', timestamp) = CURRENT_DATE AND user_id = $1 ORDER BY expense_id DESC;",[BigInt(req.user.user_id)]);
-    items = result.rows;
-    console.log(result);
-    res.render("home.ejs", {
-      listTitle: "Today",
-      listItems: items,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-
 app.get('/logout', checkAuthenticated, (req, res) => {
     req.logOut((err) => {
         if (err) {
@@ -73,6 +55,78 @@ app.get('/logout', checkAuthenticated, (req, res) => {
         res.render('login');
     });
 });
+
+let items = [];
+let categorywise = {
+    food:0,
+    entertainment:0,
+    commute:0,
+    shopping:0,
+    health:0,
+    education:0,
+    others:0
+  };
+
+app.get("/home", checkAuthenticated,async (req, res) => {
+    try {
+
+        const result = await pool.query("SELECT * FROM expensesheet WHERE DATE_TRUNC('day', timestamp) = CURRENT_DATE AND user_id = $1 ORDER BY expense_id DESC;",[req.user.user_id]);
+        items = result.rows;
+        // console.log(result);
+        categorywise = {
+            food:0,
+            entertainment:0,
+            commute:0,
+            shopping:0,
+            health:0,
+            education:0,
+            others:0
+          };
+    
+    items.forEach(item=>{
+      switch(item.category){
+    case 'Food':
+      categorywise.food += parseFloat(item.amount);
+      break;
+      case 'Entertainment':
+      categorywise.entertainment +=parseFloat( item.amount);
+      break;
+    
+      case 'Commute':
+      categorywise.commute += parseFloat(item.amount);
+      break;
+    
+      case 'Shopping':
+      categorywise.shopping +=parseFloat( item.amount);
+      break;
+    
+      case 'Health':
+      categorywise.health +=parseFloat( item.amount);
+      break;
+    
+      case 'Education':
+        categorywise.education += parseFloat(item.amount);
+        break;
+      case 'Others':
+          categorywise.others += parseFloat(item.amount);
+          break;
+      default :
+      console.log("in default case");  
+      
+      }
+      
+    });
+        res.render("home.ejs", {
+          listTitle: "Today",
+          listItems: items,
+          categorywise
+        });
+      } catch (err) {
+        console.log(err);
+      }
+});
+
+
 
 app.get('/deleteexpense/:id',checkAuthenticated,async(req,res)=>{
     const deletingId = req.params.id;
@@ -95,7 +149,8 @@ app.get('/friends', checkAuthenticated, async (req, res) => {
         res.render('friends', { friends: friendsData.rows[0].friends_array, errmsg: "user not found" });
 
     }
-    res.render('friends', { friends: friendsData.rows[0].friends_array });
+    res.render('friends', { friends: friendsData.rows[0].friends_array,
+    categorywise,listItems: items });
 });
 
 
@@ -175,6 +230,10 @@ if (groupCodes!==null) {
 }
 });
 });
+
+
+
+
 
 app.get('/creategroup', checkAuthenticated, async (req, res) => {
     function generateRandomNumber() {
@@ -268,7 +327,7 @@ app.post('/signup', async (req, res) => {
                     req.flash("success_msg", "you have successfully registered, Please Login");
                     pool.query(`INSERT INTO friends (user_id)
                                 VALUES ($1)`, [BigInt(newUserId)]);
-                    res.redirect('/')
+                    res.redirect('/login')
                 }
                 )
 
@@ -337,7 +396,7 @@ app.post('/add-friend', checkAuthenticated, async (req, res) => {
                 throw err;
             }
             console.log(results);
-            res.render("friends", { friends: results.rows[0].friends_array });
+            res.render("friends", { friends: results.rows[0].friends_array, categorywise,listItems: items});
 
         });
     }
