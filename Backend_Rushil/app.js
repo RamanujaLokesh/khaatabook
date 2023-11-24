@@ -12,17 +12,62 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(morgan("dev"));
 
-let items = [];
+
 
 
 app.get("/", async (req, res) => {
   try {
+    let items = [];
     const result = await pool.query("SELECT * FROM expensesheet WHERE DATE_TRUNC('day', timestamp) = CURRENT_DATE AND user_id = $1 ORDER BY expense_id DESC;",[1]);
     items = result.rows;
-    console.log(result);
+    // console.log(result);
+    let categorywise = {
+      food:0,
+      entertainment:0,
+      commute:0,
+      shopping:0,
+      health:0,
+      education:0,
+      others:0
+    };
+
+items.forEach(item=>{
+  switch(item.category){
+case 'Food':
+  categorywise.food += parseFloat(item.amount);
+  break;
+  case 'Entertainment':
+  categorywise.entertainment +=parseFloat( item.amount);
+  break;
+
+  case 'Commute':
+  categorywise.commute += parseFloat(item.amount);
+  break;
+
+  case 'Shopping':
+  categorywise.shopping +=parseFloat( item.amount);
+  break;
+
+  case 'Health':
+  categorywise.health +=parseFloat( item.amount);
+  break;
+
+  case 'Education':
+    categorywise.education += parseFloat(item.amount);
+    break;
+  case 'Others':
+      categorywise.others += parseFloat(item.amount);
+      break;
+  default :
+  console.log("in default case");  
+  
+  }
+  
+});
     res.render("home.ejs", {
       listTitle: "Today",
       listItems: items,
+      categorywise
     });
   } catch (err) {
     console.log(err);
@@ -39,20 +84,12 @@ console.log(err);
 }
 });
 
-// app.get('/edit/:id',async(req,res)=>{
-//   const updatingingId = req.params.id;
-//   try{
-//     pool.query(`UPDATE expensesheet SET note = $1 WHERE expense_id = $2;`,[req.body.note,parseInt(updatingingId)]);
-//   }catch(err){
-//   console.log(err);  
-//   }
-//   });
+
 
 
 app.post("/add", async (req, res) => {
   const item = req.body.newItem;
-  // const amount=parseInt;
-  // items.push({title: item});
+
   try {
     pool.query("INSERT INTO expensesheet (amount,category,user_id,note) VALUES ($1,$2,$3,$4);", [req.body.newAmount,req.body.newCategory,1,req.body.newNote]);
      res.redirect("/");
@@ -73,23 +110,7 @@ app.post("/edit", async (req, res) => {
   }
 });
 
-// app.delete("/delete", async (req, res) => {
-//   const id = req.params.deleteItemId;
-//   // try {
-//   //   await pool.query("DELETE FROM expensesheet WHERE expense_id = $1", [3,1]);
-//   //   res.redirect("/");
-//   // } catch (err) {
-//   //   console.log(err);
-//   // }
 
-//   await pool.query("DELETE FROM expensesheet WHERE expense_id = $1", [id])
-//     .then(result =>{
-//       res.redirect("/");
-//         })
-//     .catch(err =>{
-//       console.log(err);
-//     });
-// });
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
